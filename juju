@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      max-width: 400px;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 0 0.5rem;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: #adb5bd;
+      color: white;
+    }
+
+    img {
+      margin-top: 1rem;
+      max-width: 100%;
+      border-radius: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="question">Maya, will you be my Valentine? 💖</h1>
+
+    <div id="buttons">
+      <button class="yes" onclick="yesClicked()">Yes</button>
+      <button class="no" onclick="noClicked()">No</button>
+    </div>
+
+    <img id="sadImage" src="https://i.imgur.com/3ZQ3ZQZ.png" alt="sad cat" />
+  </div>
+
+  <script>
+    let noCount = 0;
+
+    function yesClicked() {
+      document.getElementById("question").innerText = "Yay!! 💘 I knew it 🥰";
+      document.getElementById("buttons").style.display = "none";
+      document.getElementById("sadImage").style.display = "none";
+    }
+
+    function noClicked() {
+      const question = document.getElementById("question");
+      const img = document.getElementById("sadImage");
+      noCount++;
+
+      question.innerText = "Are you sure? 🥺";
+      img.style.display = "block";
+
+      if (noCount > 1) {
+        question.innerText = "Are you REALLY sure? 😭";
+      }
+    }
+  </script>
+</body>
+</html>
