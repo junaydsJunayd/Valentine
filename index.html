@@ -12,6 +12,7 @@
       align-items: center;
       justify-content: center;
       margin: 0;
+      overflow: hidden;
     }
 
     .card {
@@ -20,7 +21,8 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      max-width: 400px;
+      max-width: 420px;
+      position: relative;
     }
 
     h1 {
@@ -33,17 +35,22 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      margin: 0 0.5rem;
+      position: absolute;
+      transition: all 0.3s ease;
     }
 
     .yes {
       background-color: #ff4d6d;
       color: white;
+      left: 40%;
+      bottom: 20px;
     }
 
     .no {
       background-color: #adb5bd;
       color: white;
+      left: 10%;
+      bottom: 20px;
     }
 
     img {
@@ -58,33 +65,64 @@
   <div class="card">
     <h1 id="question">Maya, will you be my Valentine? 💖</h1>
 
-    <div id="buttons">
-      <button class="yes" onclick="yesClicked()">Yes</button>
-      <button class="no" onclick="noClicked()">No</button>
-    </div>
+    <button id="yesBtn" class="yes" onclick="yesClicked()">JAA BITTE</button>
+    <button id="noBtn" class="no" onclick="noClicked()">No</button>
 
-    <img id="sadImage" src="https://i.imgur.com/3ZQ3ZQZ.png" alt="sad cat" />
+    <img id="reactionImage" src="img1.jpg" alt="reaction" />
   </div>
 
   <script>
     let noCount = 0;
 
+    const yesTexts = [
+      "JAA BITTE",
+      "JA",
+      "jaa",
+      "ja ig",
+      "wenn es sein muss...",
+      "SAG JETZT JA MAYA"
+    ];
+
+    const images = [
+      "img1.jpg",
+      "img2.jpg",
+      "img3.jpg",
+      "img4.jpg",
+      "img5.jpg"
+    ];
+
     function yesClicked() {
-      document.getElementById("question").innerText = "Yay!! 💘 I knew it 🥰";
-      document.getElementById("buttons").style.display = "none";
-      document.getElementById("sadImage").style.display = "none";
+      document.getElementById("question").innerText = "YAY 💘💘💘";
+      document.getElementById("yesBtn").style.display = "none";
+      document.getElementById("noBtn").style.display = "none";
+      document.getElementById("reactionImage").style.display = "none";
     }
 
     function noClicked() {
-      const question = document.getElementById("question");
-      const img = document.getElementById("sadImage");
       noCount++;
 
-      question.innerText = "Are you sure? 🥺";
-      img.style.display = "block";
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const img = document.getElementById("reactionImage");
 
-      if (noCount > 1) {
-        question.innerText = "Are you REALLY sure? 😭";
+      // Bild wechseln
+      if (noCount <= 5) {
+        img.src = images[noCount - 1];
+        img.style.display = "block";
+      }
+
+      // Ja-Button größer + Text ändern
+      yesBtn.style.transform = `scale(${1 + noCount * 0.2})`;
+      yesBtn.innerText = yesTexts[Math.min(noCount, 5)];
+
+      // Nein-Button kleiner + neue Position
+      noBtn.style.transform = `scale(${1 - noCount * 0.15})`;
+      noBtn.style.left = Math.random() * 70 + "%";
+      noBtn.style.bottom = Math.random() * 60 + "px";
+
+      // Nach 5 Klicks: Nein-Button weg
+      if (noCount >= 5) {
+        noBtn.style.display = "none";
       }
     }
   </script>
