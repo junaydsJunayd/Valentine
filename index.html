@@ -17,16 +17,17 @@
 
     .card {
       background: white;
-      padding: 2rem 3rem;
+      padding: 2rem 3rem 4rem;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
       max-width: 420px;
+      width: 90%;
       position: relative;
     }
 
     h1 {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     button {
@@ -42,7 +43,8 @@
     .yes {
       background-color: #ff4d6d;
       color: white;
-      left: 40%;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 20px;
     }
 
@@ -59,6 +61,13 @@
       border-radius: 15px;
       display: none;
     }
+
+    #finalGif {
+      width: 100%;
+      max-width: 350px;
+      margin-top: 1.5rem;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -68,7 +77,8 @@
     <button id="yesBtn" class="yes" onclick="yesClicked()">JAA BITTE</button>
     <button id="noBtn" class="no" onclick="noClicked()">No</button>
 
-    <img id="reactionImage" src="img1.jpg" alt="reaction" />
+    <img id="reactionImage" src="img1.jpeg" alt="reaction" />
+    <img id="finalGif" src="final.gif" alt="celebration gif" />
   </div>
 
   <script>
@@ -92,10 +102,13 @@
     ];
 
     function yesClicked() {
-      document.getElementById("question").innerText = "YIPPPIE 💘💘💘";
+      document.getElementById("question").innerText = "YAYYY 💘💘💘";
       document.getElementById("yesBtn").style.display = "none";
       document.getElementById("noBtn").style.display = "none";
       document.getElementById("reactionImage").style.display = "none";
+
+      const gif = document.getElementById("finalGif");
+      gif.style.display = "block";
     }
 
     function noClicked() {
@@ -105,20 +118,20 @@
       const yesBtn = document.getElementById("yesBtn");
       const img = document.getElementById("reactionImage");
 
-      // Bild wechseln
+      // Bild wechseln (max 5)
       if (noCount <= 5) {
         img.src = images[noCount - 1];
         img.style.display = "block";
       }
 
       // Ja-Button größer + Text ändern
-      yesBtn.style.transform = `scale(${1 + noCount * 0.2})`;
+      yesBtn.style.transform = `translateX(-50%) scale(${1 + noCount * 0.25})`;
       yesBtn.innerText = yesTexts[Math.min(noCount, 5)];
 
-      // Nein-Button kleiner + neue Position
-      noBtn.style.transform = `scale(${1 - noCount * 0.15})`;
+      // Nein-Button kleiner + random Position
+      noBtn.style.transform = `scale(${1 - noCount * 0.18})`;
       noBtn.style.left = Math.random() * 70 + "%";
-      noBtn.style.bottom = Math.random() * 60 + "px";
+      noBtn.style.bottom = Math.random() * 120 + "px";
 
       // Nach 5 Klicks: Nein-Button weg
       if (noCount >= 5) {
