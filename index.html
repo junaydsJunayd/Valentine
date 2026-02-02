@@ -38,6 +38,7 @@
       cursor: pointer;
       position: absolute;
       transition: all 0.3s ease;
+      z-index: 10; /* Buttons IMMER über Bildern */
     }
 
     .yes {
@@ -46,9 +47,6 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: 20px;
-      button {
-      z-index: 2;
-      }
     }
 
     .no {
@@ -56,20 +54,15 @@
       color: white;
       left: 10%;
       bottom: 20px;
-      button {
-      z-index: 2;
-      }
     }
 
     img {
-      display: none;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       max-width: 100%;
       border-radius: 15px;
+      display: none;
       position: relative;
-      z-index: 1;
-    }
-
+      z-index: 1; /* Bilder unter Buttons */
     }
 
     #finalGif {
@@ -77,15 +70,14 @@
       max-width: 350px;
       margin-top: 1.5rem;
       display: none;
-      #finalGif {
-      z-index: 1;
-      }
+      position: relative;
+      z-index: 1; /* GIF unter Buttons */
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1 id="question">Maya, willst du my Valentine sein type shi? 💖</h1>
+    <h1 id="question">Maya, will you be my Valentine? 💖</h1>
 
     <button id="yesBtn" class="yes" onclick="yesClicked()">JAA BITTE</button>
     <button id="noBtn" class="no" onclick="noClicked()">No</button>
@@ -115,7 +107,7 @@
     ];
 
     function yesClicked() {
-      document.getElementById("question").innerText = "YIPPIE HURRAYYY💘";
+      document.getElementById("question").innerText = "YAYYY 💘💘💘";
       document.getElementById("yesBtn").style.display = "none";
       document.getElementById("noBtn").style.display = "none";
       document.getElementById("reactionImage").style.display = "none";
